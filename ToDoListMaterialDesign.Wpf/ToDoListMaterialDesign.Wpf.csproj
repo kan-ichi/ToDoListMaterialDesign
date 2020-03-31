@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ToDoListMaterialDesign.Wpf</AssemblyName>
+    <RootNamespace>ToDoListMaterialDesign</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Codes\StatusCode.cs" Link="Models\Codes\StatusCode.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\DbAccess\EfDbContext.cs" Link="Models\DbAccess\EfDbContext.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Entities\Setting.cs" Link="Models\Entities\Setting.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Entities\TodoTask.cs" Link="Models\Entities\TodoTask.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Interface\IRequest.cs" Link="Models\Interface\IRequest.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Interface\IResponse.cs" Link="Models\Interface\IResponse.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\DalTodoTask.cs" Link="Models\Logics\DalTodoTask.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\EditViewSearch.cs" Link="Models\Logics\EditViewSearch.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\Error.cs" Link="Models\Logics\Error.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\MainViewSearch.cs" Link="Models\Logics\MainViewSearch.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\Request.cs" Link="Models\Logics\Request.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\Response.cs" Link="Models\Logics\Response.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\Warning.cs" Link="Models\Logics\Warning.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="1.6.5" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.2" />
+    <PackageReference Include="Prism.Unity" Version="7.2.0.1367" />
+    <PackageReference Include="ReactiveProperty" Version="6.2.0" />
+    <PackageReference Include="System.Management" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\DbAccess\" />
+    <Folder Include="Models\Entities\" />
+    <Folder Include="Models\Codes\" />
+    <Folder Include="Models\Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ToDoListMaterialDesign.Core\ToDoListMaterialDesign.db" Link="ToDoListMaterialDesign.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

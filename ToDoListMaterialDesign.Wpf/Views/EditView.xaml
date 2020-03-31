@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="ToDoListMaterialDesign.Views.EditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToDoListMaterialDesign.Views"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             dialog:DialogParticipation.Register="{Binding}"
+             xmlns:viewModels="clr-namespace:ToDoListMaterialDesign.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:EditViewModel, IsDesignTimeCreatable=True}"
+             d:DesignWidth="800" d:DesignHeight="600">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1"
+                     Height="Auto"
+                     materialDesign:HintAssist.Hint="検索ワード"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding SearchConditionsText.Value}"/>
+
+            <DatePicker Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            materialDesign:HintAssist.Hint="検索開始日"
+                            InputMethod.IsInputMethodEnabled="False"
+                            SelectedDate="{Binding SearchConditionsDateFrom.Value, Mode=TwoWay}"
+                            Name="SearchConditionsDateFrom"/>
+
+            <DatePicker Grid.Row="0" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            materialDesign:HintAssist.Hint="検索終了日"
+                            InputMethod.IsInputMethodEnabled="False"
+                            SelectedDate="{Binding SearchConditionsDateTo.Value, Mode=TwoWay}"
+                            Name="SearchConditionsDateTo"/>
+
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0" ToolTip="検索"
+                    Command="{Binding SearchClick}">
+                <materialDesign:PackIcon Margin="0" Height="Auto" Width="Auto" Kind="Search"/>
+            </Button>
+
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0" ToolTip="検索条件クリア"
+                    Command="{Binding SearchConditionsClearClick}" Cursor="Hand" >
+                <materialDesign:PackIcon Margin="0" Height="Auto" Width="Auto" Kind="CloseOutline"/>
+            </Button>
+
+        </Grid>
+
+        <DataGrid Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" HorizontalScrollBarVisibility="Visible"
+                  IsReadOnly="True" SelectionMode="Single"
+                  ItemsSource="{Binding DataGridItemsSource}"
+                  SelectedItem="{Binding DataGridSelectedItem.Value, Mode=TwoWay}"
+                  Name="DataGrid">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn IsReadOnly="True">
+                    <DataGridTemplateColumn.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"> 全て</TextBlock>
+                            <CheckBox Style="{StaticResource MaterialDesignUserForegroundCheckBox}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Name="CheckBoxAll" Checked="CheckBoxAll_Checked" Unchecked="CheckBoxAll_Unchecked"
+                                      IsChecked="{Binding IsDataGridAllSelected.Value, Mode=TwoWay}"
+                                      DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"/>
+                        </StackPanel>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Style="{StaticResource MaterialDesignUserForegroundCheckBox}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Unchecked="CheckBoxEach_Unchecked"
+                                      IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header=" 期日 ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding TodoTask.DueDate, StringFormat={}{0:yyyy/MM/dd }}"/>
+                                <TextBlock Text="{Binding TodoTask.DueDate, StringFormat={}{0:HH\\:mm}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding TodoTaskStatusName}" Header=" 状況 "/>
+                <DataGridTextColumn Binding="{Binding TodoTask.Subject}" Header=" 内容 "/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <materialDesign:Snackbar Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1"
+                                 VerticalAlignment="Center"
+                                 MessageQueue="{Binding SnackBarMessageQueue}" />
+
+        <Grid Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0" ToolTip="選択した行を削除"
+                    Command="{Binding DeleteClick}" >
+                <materialDesign:PackIcon Margin="0" Height="Auto" Width="Auto" Kind="Delete"/>
+            </Button>
+
+            <DatePicker Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1"
+                        VerticalAlignment="Bottom"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        materialDesign:HintAssist.Hint="期日"
+                        materialDesign:ValidationAssist.Suppress="True"
+                        InputMethod.IsInputMethodEnabled="False"
+                        SelectedDate="{Binding DueDate.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        Name="DueDate"/>
+
+            <ComboBox Grid.Row="0" Grid.RowSpan="1" Grid.Column="4" Grid.ColumnSpan="1"
+                      VerticalAlignment="Bottom"
+                      materialDesign:ComboBoxAssist.ClassicMode="True"
+                      materialDesign:HintAssist.Hint=" 時 "
+                      materialDesign:ValidationAssist.Suppress="True"
+                      ItemsSource="{Binding DueDateHourItemsSource}" SelectedValue="{Binding DueDateHour.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <ComboBox Grid.Row="0" Grid.RowSpan="1" Grid.Column="6" Grid.ColumnSpan="1"
+                      VerticalAlignment="Bottom"
+                      materialDesign:ComboBoxAssist.ClassicMode="True"
+                      materialDesign:HintAssist.Hint=" 分 "
+                      materialDesign:ValidationAssist.Suppress="True"
+                      ItemsSource="{Binding DueDateMinuteItemsSource}" SelectedValue="{Binding DueDateMinute.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <CheckBox Grid.Row="0" Grid.RowSpan="1" Grid.Column="8" Grid.ColumnSpan="1"
+                      VerticalAlignment="Bottom"
+                      Content="状況：finished"
+                      IsChecked="{Binding Status.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <TextBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="7"
+                     Height="Auto"
+                     AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                     materialDesign:HintAssist.Hint="内容"
+                     materialDesign:ValidationAssist.Suppress="True"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Subject.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0" ToolTip="更新"
+                    Command="{Binding UpdateClick}" Cursor="Hand" >
+                <materialDesign:PackIcon Margin="0" Height="Auto" Width="Auto" Kind="PlaylistAddCheck"/>
+            </Button>
+
+            <Button Grid.Row="2" Grid.RowSpan="1" Grid.Column="10" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0" ToolTip="追加"
+                    Command="{Binding AddClick}" >
+                <materialDesign:PackIcon Margin="0" Height="Auto" Width="Auto" Kind="FiberNew"/>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

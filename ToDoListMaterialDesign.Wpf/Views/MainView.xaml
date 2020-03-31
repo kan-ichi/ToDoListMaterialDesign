@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="ToDoListMaterialDesign.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToDoListMaterialDesign.Views"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:viewModels="clr-namespace:ToDoListMaterialDesign.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+             d:DesignWidth="800" d:DesignHeight="600">
+    
+    <Grid Margin="10">
+        
+        <DataGrid Grid.Row="0" Grid.RowSpan="1" Grid.Column="2" Grid.ColumnSpan="1"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" HorizontalScrollBarVisibility="Visible"
+                  IsReadOnly="True" SelectionMode="Single"
+                  ItemsSource="{Binding DataGridItemsSource}"
+                  SelectedItem="{Binding DataGridSelectedItem.Value, Mode=TwoWay}"
+                  Name="DataGrid">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Finish!" mah:ControlsHelper.ContentCharacterCasing="Normal"
+                                    Command="{Binding Path=DataContext.FinishClick, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" mah:ControlsHelper.ContentCharacterCasing="Normal"
+                                    Command="{Binding Path=DataContext.EditClick, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header=" 期日 ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding TodoTask.DueDate, StringFormat={}{0:yyyy/MM/dd }}"/>
+                                <TextBlock Text="{Binding TodoTask.DueDate, StringFormat={}{0:HH\\:mm}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding TodoTaskStatusName}" Header=" 状況 "/>
+                <DataGridTextColumn Binding="{Binding TodoTask.Subject}" Header=" 内容 "/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<mah:MetroWindow x:Class="ToDoListMaterialDesign.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:viewModels="clr-namespace:ToDoListMaterialDesign.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle.Value, Mode=OneTime}" Width="800" Height="600" TextElement.FontSize="16"
+        TitleCaps="False" WindowStartupLocation="CenterScreen">
+
+    <mah:MetroWindow.Resources>
+        <!-- MaterialDesignThemeのスタイル定義一覧 https://qiita.com/gameislifeluka/items/0b7c7a9dcaaeb7ee82c0 -->
+        <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}" BasedOn="{StaticResource MaterialDesignToolTip}">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type materialDesign:SnackbarMessage}}" TargetType="{x:Type materialDesign:SnackbarMessage}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </mah:MetroWindow.Resources>
+
+    <materialDesign:DrawerHost Name="MaterialDesignDrawerHost">
+
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <Grid Width="150">
+                <ListBox Grid.Column="0" Name="MenuListBox"
+                         SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single"
+                         ItemsSource="{Binding ListBoxItemsSource}"
+                         SelectedItem="{Binding ListBoxSelectedItem.Value, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName, Mode=OneWay}" Margin="2"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="1"
+                    Height="Auto" Padding="0"
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}">
+                <Label Content="Menu" FontSize="24" Foreground="White">
+                    <Label.LayoutTransform>
+                        <RotateTransform Angle="90"/>
+                    </Label.LayoutTransform>
+                </Label>
+            </Button>
+
+            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"/>
+
+            <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Column="2" IsTabStop="False"/>
+
+        </Grid>
+    </materialDesign:DrawerHost>
+</mah:MetroWindow>
+

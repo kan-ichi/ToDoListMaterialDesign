@@ -1,0 +1,14 @@
+﻿################################################################################
+# この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
+################################################################################
+
+*.suo
+*.csproj.user
+/.vs
+/ToDoListMaterialDesign.Core/bin
+/ToDoListMaterialDesign.Core/obj
+/ToDoListMaterialDesign.EntityFramework/bin
+/ToDoListMaterialDesign.EntityFramework/obj
+/ToDoListMaterialDesign.Wpf/bin
+/ToDoListMaterialDesign.Wpf/obj
+
