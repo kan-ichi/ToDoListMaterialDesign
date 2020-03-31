@@ -2,6 +2,8 @@
 Windows PC stand-alone で動作する ToDoList のサンプルアプリケーションです。  
 MVVMパターンの学習用として作成しています。
 
+![ToDoListMaterialDesign](https://user-images.githubusercontent.com/43694066/78010033-dc74c300-737c-11ea-9310-4698af1e635b.png)
+
 # Dependency
 MaterialDesignInXamlToolkit Prism.Wpf ReactiveProperty MahApps.Metro EntityFrameworkCore.Sqlite を使用しています。
 
