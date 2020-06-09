@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ToDoListMaterialDesign.Models.DbAccess;
 using ToDoListMaterialDesign.Models.Entities;
 
-namespace ToDoListMaterialDesign.Models.Logics
+namespace ToDoListMaterialDesign.Models.DbAccess
 {
     public static class DalTodoTask
     {
@@ -77,6 +76,7 @@ namespace ToDoListMaterialDesign.Models.Logics
                     entity = new TodoTask() { TodoTaskId = _entity.TodoTaskId ?? EfDbContext.GenerateId() };
                     entity.CopyValuesFrom(_entity);
                     context.Add(entity);
+                    _entity.TodoTaskId = entity.TodoTaskId;
                 }
                 else
                 {

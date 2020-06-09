@@ -8,12 +8,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Codes\StatusCode.cs" Link="Models\Codes\StatusCode.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.Core\Models\DbAccess\DalTodoTask.cs" Link="Models\DbAccess\DalTodoTask.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\DbAccess\EfDbContext.cs" Link="Models\DbAccess\EfDbContext.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Entities\Setting.cs" Link="Models\Entities\Setting.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Entities\TodoTask.cs" Link="Models\Entities\TodoTask.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Interface\IRequest.cs" Link="Models\Interface\IRequest.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Interface\IResponse.cs" Link="Models\Interface\IResponse.cs" />
-    <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\DalTodoTask.cs" Link="Models\Logics\DalTodoTask.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\EditViewSearch.cs" Link="Models\Logics\EditViewSearch.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\Error.cs" Link="Models\Logics\Error.cs" />
     <Compile Include="..\ToDoListMaterialDesign.Core\Models\Logics\MainViewSearch.cs" Link="Models\Logics\MainViewSearch.cs" />

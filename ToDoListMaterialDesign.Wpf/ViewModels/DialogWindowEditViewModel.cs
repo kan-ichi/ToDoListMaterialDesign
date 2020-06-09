@@ -10,8 +10,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ToDoListMaterialDesign.Models.Codes;
+using ToDoListMaterialDesign.Models.DbAccess;
 using ToDoListMaterialDesign.Models.Entities;
-using ToDoListMaterialDesign.Models.Logics;
 
 namespace ToDoListMaterialDesign.ViewModels
 {
