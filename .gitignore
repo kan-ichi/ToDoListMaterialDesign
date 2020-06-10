@@ -11,4 +11,7 @@
 /ToDoListMaterialDesign.EntityFramework/obj
 /ToDoListMaterialDesign.Wpf/bin
 /ToDoListMaterialDesign.Wpf/obj
-
+/ToDoListMaterialDesign.CoreTest/bin
+/ToDoListMaterialDesign.CoreTest/obj
+/ToDoListMaterialDesign.WpfTest/bin
+/ToDoListMaterialDesign.WpfTest/obj
