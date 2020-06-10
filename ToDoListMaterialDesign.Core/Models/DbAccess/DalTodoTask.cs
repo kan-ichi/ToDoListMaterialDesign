@@ -24,7 +24,7 @@ namespace ToDoListMaterialDesign.Models.DbAccess
         {
             foreach (var property in _copyTo.GetType().GetProperties())
             {
-                if (!(property.CanWrite)) continue;
+                if (!property.CanWrite) continue;
                 switch (property.Name)
                 {
                     case nameof(_copyTo.TodoTaskId):

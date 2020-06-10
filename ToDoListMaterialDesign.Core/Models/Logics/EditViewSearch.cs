@@ -34,7 +34,7 @@ namespace ToDoListMaterialDesign.Models.Logics
             {
                 IQueryable<TodoTask> query = context.TodoTasks.OrderBy(o => o.DueDate).ThenBy(o => o.TodoTaskId);
 
-                if (!(string.IsNullOrEmpty(parameter.SearchConditionsText)))
+                if (!string.IsNullOrEmpty(parameter.SearchConditionsText))
                 {
                     query = query.Where(w => w.Subject.Contains(parameter.SearchConditionsText));
                 }
