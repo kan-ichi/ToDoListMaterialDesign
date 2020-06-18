@@ -27,7 +27,8 @@ namespace ToDoListMaterialDesign.ViewModels
 
         #region items for test
 
-        public IDialogService TestDialogService { get; set; } = null;
+        public IDialogResult TestDialogResult { get; set; } = null;
+        public IDialogParameters TestDialogParameters { get; set; } = null;
         public IRequest TestRequest { get; set; } = null;
         public IResponse TestResponse { get; set; } = null;
 
@@ -80,7 +81,7 @@ namespace ToDoListMaterialDesign.ViewModels
 
         public MainViewModel(IDialogService _dialogService)
         {
-            this._dlgService_ = this.TestDialogService ?? _dialogService;
+            this._dlgService_ = _dialogService;
             this.InitializeBindings();
         }
 
@@ -121,13 +122,19 @@ namespace ToDoListMaterialDesign.ViewModels
         /// </summary>
         private void Edit_Click()
         {
-            var param = new DialogParameters { { "TodoTask", this.EditingTodoTask } };
+            var dialogParameters = new DialogParameters { { nameof(DialogWindowEditViewModel.Parameter), new DialogWindowEditViewModel.Parameter
+            {
+                TodoTask = this.EditingTodoTask,
+            } } };
             var retResult = ButtonResult.Cancel;
             IDialogParameters retParameters = null;
-            this._dlgService_.ShowDialog("DialogWindowEditView", param, r => { retResult = r.Result; retParameters = r.Parameters; });
+            this._dlgService_.ShowDialog(DialogWindowEditViewModel.ViewName, dialogParameters, r => { retResult = r.Result; retParameters = r.Parameters; });
+            if (this.TestDialogResult != null) retResult = this.TestDialogResult.Result; // logic for test
+            if (this.TestDialogParameters != null) retParameters = this.TestDialogParameters; // logic for test
             if (retResult == ButtonResult.OK)
             {
-                var entity = retParameters?.GetValue<TodoTask>("TodoTask");
+                DialogWindowEditViewModel.Result result = retParameters.GetValue<DialogWindowEditViewModel.Result>(nameof(DialogWindowEditViewModel.Result));
+                var entity = result.TodoTask;
                 DalTodoTask.Update(entity);
             }
             this.DisplaySearchResult();
@@ -173,7 +180,6 @@ namespace ToDoListMaterialDesign.ViewModels
         #endregion
 
         #endregion
-
 
     }
 }

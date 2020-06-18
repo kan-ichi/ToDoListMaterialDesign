@@ -17,6 +17,7 @@ namespace ToDoListMaterialDesign.Views
     /// <summary>
     /// EditView.xaml の相互作用ロジック
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
     public partial class EditView : UserControl
     {
         public EditView()

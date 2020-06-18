@@ -16,6 +16,7 @@ namespace ToDoListMaterialDesign.Views
     /// <summary>
     /// MainView.xaml の相互作用ロジック
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
     public partial class MainView : UserControl
     {
         public MainView()

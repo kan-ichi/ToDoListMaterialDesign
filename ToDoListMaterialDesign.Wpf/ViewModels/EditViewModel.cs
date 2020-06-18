@@ -4,7 +4,6 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -56,7 +55,8 @@ namespace ToDoListMaterialDesign.ViewModels
 
         #region items for test
 
-        public IDialogService TestDialogService { get; set; } = null;
+        public IDialogResult TestDialogResult { get; set; } = null;
+        public IDialogParameters TestDialogParameters { get; set; } = null;
         public IRequest TestRequest { get; set; } = null;
         public IResponse TestResponse { get; set; } = null;
 
@@ -109,7 +109,7 @@ namespace ToDoListMaterialDesign.ViewModels
 
         public EditViewModel(IDialogService _dialogService)
         {
-            this._dlgService_ = this.TestDialogService ?? _dialogService;
+            this._dlgService_ = _dialogService;
             this.InitializeBindings();
         }
 
@@ -284,9 +284,9 @@ namespace ToDoListMaterialDesign.ViewModels
             this.IsDataGridAllSelected = new ReactivePropertySlim<bool>().AddTo(this._disposables_);
 
             this.DueDate = new ReactiveProperty<DateTime?>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDate);
-            this.DueDateHourItemsSource = new ReadOnlyCollection<string>(new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
+            this.DueDateHourItemsSource = new ReadOnlyCollection<string>(Enumerable.Range(0, 24).Select(s => s.ToString("00")).ToList());
             this.DueDateHour = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDateHour);
-            this.DueDateMinuteItemsSource = new ReadOnlyCollection<string>(new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
+            this.DueDateMinuteItemsSource = new ReadOnlyCollection<string>(Enumerable.Range(0, 60).Select(s => s.ToString("00")).ToList());
             this.DueDateMinute = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDateMinute);
             this.Status = new ReactiveProperty<bool>().AddTo(this._disposables_).SetValidateAttribute(() => this.Status);
             this.Subject = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.Subject);

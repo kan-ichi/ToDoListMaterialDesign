@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListMaterialDesign.Wpf"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListMaterialDesign.CoreTest", "ToDoListMaterialDesign.CoreTest\ToDoListMaterialDesign.CoreTest.csproj", "{C0561BDB-2F9B-400C-BECB-A6D5FB0FB289}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListMaterialDesign.WpfTest", "ToDoListMaterialDesign.WpfTest\ToDoListMaterialDesign.WpfTest.csproj", "{B90021D1-08C4-42CC-B0FC-319E0A8F240D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C0561BDB-2F9B-400C-BECB-A6D5FB0FB289}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0561BDB-2F9B-400C-BECB-A6D5FB0FB289}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0561BDB-2F9B-400C-BECB-A6D5FB0FB289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B90021D1-08C4-42CC-B0FC-319E0A8F240D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B90021D1-08C4-42CC-B0FC-319E0A8F240D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B90021D1-08C4-42CC-B0FC-319E0A8F240D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B90021D1-08C4-42CC-B0FC-319E0A8F240D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

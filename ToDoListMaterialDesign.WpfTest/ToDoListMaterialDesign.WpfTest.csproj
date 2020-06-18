@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ToDoListMaterialDesign.CoreTest\Models\Codes\StatusCodeTest.cs" Link="Models\Codes\StatusCodeTest.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.CoreTest\Models\DbAccess\DalTodoTaskTest.cs" Link="Models\DbAccess\DalTodoTaskTest.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.CoreTest\Models\Logics\EditViewSearchTest.cs" Link="Models\Logics\EditViewSearchTest.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.CoreTest\Models\Logics\MainViewSearchTest.cs" Link="Models\Logics\MainViewSearchTest.cs" />
+    <Compile Include="..\ToDoListMaterialDesign.CoreTest\TestUtilLib.cs" Link="TestUtilLib.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoListMaterialDesign.Wpf\ToDoListMaterialDesign.Wpf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Codes\" />
+    <Folder Include="Models\DbAccess\" />
+    <Folder Include="Models\Logics\" />
+  </ItemGroup>
+
+</Project>

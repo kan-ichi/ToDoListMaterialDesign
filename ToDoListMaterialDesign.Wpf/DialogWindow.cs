@@ -4,6 +4,7 @@ using Prism.Services.Dialogs;
 
 namespace ToDoListMaterialDesign
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
     public partial class DialogWindow : MetroWindow, IDialogWindow
     {
         public IDialogResult Result { get; set; }

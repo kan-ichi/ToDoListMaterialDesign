@@ -6,6 +6,7 @@ namespace ToDoListMaterialDesign.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
     public partial class MainWindow : MetroWindow
     {
         public MainWindow()

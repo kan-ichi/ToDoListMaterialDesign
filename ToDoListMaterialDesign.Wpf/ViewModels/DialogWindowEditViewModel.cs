@@ -4,9 +4,9 @@ using Prism.Services.Dialogs;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using ToDoListMaterialDesign.Models.Codes;
@@ -17,6 +17,18 @@ namespace ToDoListMaterialDesign.ViewModels
 {
     class DialogWindowEditViewModel : BindableBase, IDisposable, IDialogAware
     {
+        public const string ViewName = "DialogWindowEditView";
+
+        public struct Parameter
+        {
+            public TodoTask TodoTask { get; set; }
+        }
+
+        public struct Result
+        {
+            public TodoTask TodoTask { get; set; }
+        }
+
         #region view binding items
 
         public SnackbarMessageQueue SnackBarMessageQueue { get; private set; }
@@ -57,7 +69,9 @@ namespace ToDoListMaterialDesign.ViewModels
         /// <param name="_parameters">IDialogServiceに設定されたパラメータを表すIDialogParameters。</param>
         public void OnDialogOpened(IDialogParameters _parameters)
         {
-            var entity = _parameters?.GetValue<TodoTask>("TodoTask");
+            if (_parameters == null) return;
+            var parameter = _parameters.GetValue<Parameter>(nameof(Parameter));
+            var entity = parameter.TodoTask;
             this.DisplayEntity(entity);
         }
 
@@ -88,7 +102,7 @@ namespace ToDoListMaterialDesign.ViewModels
         private void Update_Click()
         {
             var param = new DialogParameters();
-            param.Add("TodoTask", this.CollectScreenInformation(new TodoTask()));
+            param.Add(nameof(Result), new Result { TodoTask = this.CollectScreenInformation(new TodoTask()) });
             this.RequestClose?.Invoke(new DialogResult(ButtonResult.OK, param));
         }
 
@@ -167,9 +181,9 @@ namespace ToDoListMaterialDesign.ViewModels
             this.TodoTaskId = new ReactivePropertySlim<string>().AddTo(this._disposables_);
 
             this.DueDate = new ReactiveProperty<DateTime?>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDate);
-            this.DueDateHourItemsSource = new ReadOnlyCollection<string>(new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" });
+            this.DueDateHourItemsSource = new ReadOnlyCollection<string>(Enumerable.Range(0, 24).Select(s => s.ToString("00")).ToList());
             this.DueDateHour = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDateHour);
-            this.DueDateMinuteItemsSource = new ReadOnlyCollection<string>(new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" });
+            this.DueDateMinuteItemsSource = new ReadOnlyCollection<string>(Enumerable.Range(0, 60).Select(s => s.ToString("00")).ToList());
             this.DueDateMinute = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.DueDateMinute);
             this.Status = new ReactiveProperty<bool>().AddTo(this._disposables_).SetValidateAttribute(() => this.Status);
             this.Subject = new ReactiveProperty<string>().AddTo(this._disposables_).SetValidateAttribute(() => this.Subject);

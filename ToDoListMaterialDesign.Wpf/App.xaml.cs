@@ -7,6 +7,7 @@ namespace ToDoListMaterialDesign
     /// <summary>
     /// App.xaml の相互作用ロジック
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
     public partial class App
     {
         protected override Window CreateShell()
