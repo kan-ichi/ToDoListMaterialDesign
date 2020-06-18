@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Prism.Services.Dialogs;
 using System;
 using System.Linq;
 using ToDoListMaterialDesign.CoreTest;
-using ToDoListMaterialDesign.Models.Codes;
 using ToDoListMaterialDesign.Models.DbAccess;
-using ToDoListMaterialDesign.Models.Interface;
-using ToDoListMaterialDesign.Models.Logics;
 using ToDoListMaterialDesign.ViewModels;
 
 namespace ToDoListMaterialDesign.WpfTest.ViewModels
@@ -18,17 +14,6 @@ namespace ToDoListMaterialDesign.WpfTest.ViewModels
     [TestClass]
     public class DialogWindowEditViewModelTest
     {
-        #region テスト用定義・変数
-
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
-        private class DummyDialogService : IDialogService
-        {
-            public void Show(string _name, IDialogParameters _parameters, Action<IDialogResult> _callback) { _callback.Invoke(new DialogResult()); }
-            public void ShowDialog(string _name, IDialogParameters _parameters, Action<IDialogResult> _callback) { _callback.Invoke(new DialogResult()); }
-        }
-
-        #endregion
-
         #region テスト準備・後始末
 
         [ClassInitialize()]
