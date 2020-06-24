@@ -199,7 +199,7 @@ namespace ToDoListMaterialDesign.ViewModels
 
             this.UpdateClick = inputHasErrors
                 .CombineLatestValuesAreAllFalse()
-                .CombineLatest(this.TodoTaskId, (x, y) => x & (!string.IsNullOrWhiteSpace(y)))
+                .CombineLatest(this.TodoTaskId, (x, y) => x && !string.IsNullOrWhiteSpace(y))
                 .ToReactiveCommand().AddTo(this._disposables_)
                 .WithSubscribe(this.Update_Click);
 
